@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import Test1 from './components/Test1.js';
 import ModalSimple from './components/ModalSimple.js';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
+
+
 
 class App extends Component {
 
@@ -10,52 +17,46 @@ class App extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+
+
+  // https://reacttraining.com/react-router/web/example/basic
   render() {
+    
     const { activeItem } = this.state
+
     return (
-      <div>
+      <Router>
 
-        <Menu fixed="top">
-            <Menu.Item header>Our Company</Menu.Item>
-            <Menu.Item
-              name='editorials'
-              active={activeItem === 'editorials'}
-              onClick={this.handleItemClick}
-            >
-              Editorials
-            </Menu.Item>
+        <div>
+            <Menu fixed="top">
+                <Menu.Item header>Our Company</Menu.Item>
+                <Menu.Item
+                  name='dogs'
+                  active={activeItem === 'dogs'}
+                  as={Link} to='/dogs'
+                >
+                  Dogs
+                </Menu.Item>
 
-            <Menu.Item
-              name='reviews'
-              active={activeItem === 'reviews'}
-              onClick={this.handleItemClick}
-            >
-              Reviews
-            </Menu.Item>
+                <Menu.Item
+                  name='modal'
+                  active={activeItem === 'modal'}
+                  as={Link} to='/modal'
+                >
+                  Modal
+                </Menu.Item>
 
-            <Menu.Item
-              name='upcomingEvents'
-              active={activeItem === 'upcomingEvents'}
-              onClick={this.handleItemClick}
-            >
-              Upcoming Events
-            </Menu.Item>
-        </Menu>
+            </Menu>
 
-        <div style={{height:"50"}}/>
-
-		<Test1/>
-        <hr/>
-        <ModalSimple />
+            <div style={{height:"50"}}/>
+            
         
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-      </div>
+            <Route exact  path="/" component={ModalSimple} />
+            <Route path="/dogs" component={Test1}/>
+            <Route path="/modal" component={ModalSimple} />
+        </div>
+        
+      </Router>
     );
   }
 }

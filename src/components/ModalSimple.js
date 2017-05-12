@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react'
 
 class ModalSimple extends Component {
   state = { open: false }
